@@ -701,9 +701,12 @@
     #define DEFAULT_Ki_LIST {   0.41,   0.41 }
     #define DEFAULT_Kd_LIST {  50.98,  50.98 }
   #else
-    #define DEFAULT_Kp   9.12
-    #define DEFAULT_Ki   0.41
-    #define DEFAULT_Kd  50.98
+    // #define DEFAULT_Kp   9.12
+    // #define DEFAULT_Ki   0.41
+    // #define DEFAULT_Kd  50.98
+    #define DEFAULT_Kp   24.51 // NSTEPP || 2024/04/25
+    #define DEFAULT_Ki    1.08 // NSTEPP || 2024/04/25
+    #define DEFAULT_Kd  139.56 // NSTEPP || 2024/04/25
   #endif
 #else
   #define BANG_MAX 255    // Limit hotend current while in bang-bang mode; 255=full current
@@ -790,9 +793,12 @@
   //#define PID_BED_DEBUG // Print Bed PID debug data to the serial port.
 
   // Duplicator 6
-  #define DEFAULT_bedKp 124.55
-  #define DEFAULT_bedKi 23.46
-  #define DEFAULT_bedKd 165.29
+  // #define DEFAULT_bedKp 124.55
+  // #define DEFAULT_bedKi 23.46
+  // #define DEFAULT_bedKd 165.29
+  #define DEFAULT_bedKp  82.52 // NSTEPP || 2024/04/25
+  #define DEFAULT_bedKi  12.91 // NSTEPP || 2024/04/25
+  #define DEFAULT_bedKd 351.50 // NSTEPP || 2024/04/25
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #else
@@ -1185,7 +1191,8 @@
 #define X_MAX_ENDSTOP_HIT_STATE HIGH
 #define Y_MIN_ENDSTOP_HIT_STATE LOW
 #define Y_MAX_ENDSTOP_HIT_STATE HIGH
-#define Z_MIN_ENDSTOP_HIT_STATE LOW
+// #define Z_MIN_ENDSTOP_HIT_STATE LOW
+#define Z_MIN_ENDSTOP_HIT_STATE HIGH // NSTEPP || 2024/04/25
 #define Z_MAX_ENDSTOP_HIT_STATE HIGH
 #define I_MIN_ENDSTOP_HIT_STATE HIGH
 #define I_MAX_ENDSTOP_HIT_STATE HIGH
@@ -1363,7 +1370,7 @@
  * The probe replaces the Z-MIN endstop and is used for Z homing.
  * (Automatically enables USE_PROBE_FOR_Z_HOMING.)
  */
-//#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
+#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN // NSTEPP || 2024/04/25
 
 // Force the use of the probe for Z-axis homing
 //#define USE_PROBE_FOR_Z_HOMING
@@ -1423,7 +1430,7 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-//#define BLTOUCH
+#define BLTOUCH // NSTEPP || 2024/04/25
 
 /**
  * MagLev V4 probe by MDD
@@ -1598,7 +1605,8 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { 10, 10, 0 }
+// #define NOZZLE_TO_PROBE_OFFSET { 10, 10, 0 }
+#define NOZZLE_TO_PROBE_OFFSET { 30, -25, -3.25 } // NSTEPP || 2024/04/25
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
 #define PROBING_TOOL 0
@@ -1608,7 +1616,8 @@
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
-#define PROBING_MARGIN 10
+// #define PROBING_MARGIN 10
+#define PROBING_MARGIN 20 // NSTEPP || 2024/04/25
 
 // X and Y axis travel speed (mm/min) between probes
 #define XY_PROBE_FEEDRATE (133*60)
@@ -1838,8 +1847,10 @@
 // @section geometry
 
 // The size of the printable area
-#define X_BED_SIZE 200
-#define Y_BED_SIZE 200
+// #define X_BED_SIZE 200
+// #define Y_BED_SIZE 200
+#define X_BED_SIZE 180 // NSTEPP || 2024/04/25
+#define Y_BED_SIZE 170 // NSTEPP || 2024/04/25
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
@@ -2058,7 +2069,7 @@
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-//#define AUTO_BED_LEVELING_BILINEAR
+#define AUTO_BED_LEVELING_BILINEAR // NSTEPP || 2024/04/25
 //#define AUTO_BED_LEVELING_UBL
 //#define MESH_BED_LEVELING
 
@@ -2141,7 +2152,8 @@
 #if ANY(AUTO_BED_LEVELING_LINEAR, AUTO_BED_LEVELING_BILINEAR)
 
   // Set the number of grid points per dimension.
-  #define GRID_MAX_POINTS_X 3
+  // #define GRID_MAX_POINTS_X 3
+  #define GRID_MAX_POINTS_X 5
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   // Probe along the Y axis, advancing X after each column
@@ -2227,7 +2239,7 @@
  * Add a bed leveling sub-menu for ABL or MBL.
  * Include a guided procedure if manual probing is enabled.
  */
-//#define LCD_BED_LEVELING
+#define LCD_BED_LEVELING // NSTEPP || 2024/04/25
 
 #if ENABLED(LCD_BED_LEVELING)
   #define MESH_EDIT_Z_STEP  0.025 // (mm) Step size while manually probing Z axis.
@@ -2294,7 +2306,7 @@
  * - Allows Z homing only when XY positions are known and trusted.
  * - If stepper drivers sleep, XY homing may be required again before Z homing.
  */
-//#define Z_SAFE_HOMING
+#define Z_SAFE_HOMING // NSTEPP || 2024/04/25
 
 #if ENABLED(Z_SAFE_HOMING)
   #define Z_SAFE_HOMING_X_POINT X_CENTER  // (mm) X point for Z homing
