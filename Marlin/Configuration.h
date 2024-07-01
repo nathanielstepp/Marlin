@@ -648,7 +648,8 @@
 // Above this temperature the heater will be switched off.
 // This can protect components from overheating, but NOT from shorts and failures.
 // (Use MINTEMP for thermistor short/failure protection.)
-#define HEATER_0_MAXTEMP 275
+// #define HEATER_0_MAXTEMP 275 // NSTEPP || 2024/06/30
+#define HEATER_0_MAXTEMP 300 // NSTEPP || 2024/06/30
 #define HEATER_1_MAXTEMP 275
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
@@ -1246,7 +1247,8 @@
  * Override with M92 (when enabled below)
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 93 }
+// #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 93 } // NSTEPP || 2024/06/30
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 415 } // NSTEPP || 2024/06/30
 
 /**
  * Enable support for M92. Disable to save at least ~530 bytes of flash.
@@ -1598,7 +1600,7 @@
  *     O-- FRONT --+
  */
 // #define NOZZLE_TO_PROBE_OFFSET { 10, 10, 0 }
- #define NOZZLE_TO_PROBE_OFFSET { -45, -5, -2.20 } // NSTEPP || 2024/05/28
+ #define NOZZLE_TO_PROBE_OFFSET { -45, -5, -2.325 } // NSTEPP || 2024/06/30
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
 #define PROBING_TOOL 0
@@ -1611,10 +1613,12 @@
 #define PROBING_MARGIN 10
 
 // X and Y axis travel speed (mm/min) between probes
-#define XY_PROBE_FEEDRATE (133*60)
+// #define XY_PROBE_FEEDRATE (133*60) // NSTEPP || 2024/06/30
+#define XY_PROBE_FEEDRATE (200*60) // NSTEPP || 2024/06/30
 
 // Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_FEEDRATE_FAST (4*60)
+// #define Z_PROBE_FEEDRATE_FAST (4*60) // NSTEPP || 2024/06/30
+#define Z_PROBE_FEEDRATE_FAST (10*60) // NSTEPP || 2024/06/30
 
 // Feedrate (mm/min) for the "accurate" probe of each point
 #define Z_PROBE_FEEDRATE_SLOW (Z_PROBE_FEEDRATE_FAST / 2)
@@ -1779,7 +1783,8 @@
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
-#define INVERT_E0_DIR true
+// #define INVERT_E0_DIR true // NSTEPP || 2024/06/30
+#define INVERT_E0_DIR false // NSTEPP || 2024/06/30
 #define INVERT_E1_DIR false
 #define INVERT_E2_DIR false
 #define INVERT_E3_DIR false
@@ -2304,7 +2309,8 @@
 #endif
 
 // Homing speeds (linear=mm/min, rotational=°/min)
-#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (4*60) }
+// #define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (4*60) } // NSTEPP || 2024/06/30
+#define HOMING_FEEDRATE_MM_M { (100*60), (100*60), (10*60) } // NSTEPP || 2024/06/30
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
@@ -2765,7 +2771,7 @@
 // Add individual axis homing items (Home X, Home Y, and Home Z) to the LCD menu.
 //
 #define INDIVIDUAL_AXIS_HOMING_MENU
-//#define INDIVIDUAL_AXIS_HOMING_SUBMENU
+#define INDIVIDUAL_AXIS_HOMING_SUBMENU // NSTEPP || 2024/06/30
 
 //
 // SPEAKER/BUZZER

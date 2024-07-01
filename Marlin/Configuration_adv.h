@@ -958,7 +958,7 @@
 
   // Safety: The probe needs time to recognize the command.
   //         Minimum command delay (ms). Enable and increase if needed.
-  //#define BLTOUCH_DELAY 500
+  #define BLTOUCH_DELAY 500 // NSTEPP || 2024/06/30
 
   /**
    * Settings for BLTOUCH Classic 1.2, 1.3 or BLTouch Smart 1.0, 2.0, 2.2, 3.0, 3.1, and most clones:
@@ -1207,12 +1207,12 @@
 #if ANY(INPUT_SHAPING_X, INPUT_SHAPING_Y)
   #if ENABLED(INPUT_SHAPING_X)
     // #define SHAPING_FREQ_X  40.0        // (Hz) The default dominant resonant frequency on the X axis. ; NSTEPP || 2024/05/28
-    #define SHAPING_FREQ_X  35.0 // NSTEPP || 2024/05/28
+    #define SHAPING_FREQ_X  37.5 // NSTEPP || 2024/05/28
     #define SHAPING_ZETA_X   0.15       // Damping ratio of the X axis (range: 0.0 = no damping to 1.0 = critical damping).
   #endif
   #if ENABLED(INPUT_SHAPING_Y)
     // #define SHAPING_FREQ_Y  40.0        // (Hz) The default dominant resonant frequency on the Y axis. ; NSTEPP || 2024/05/28
-    #define SHAPING_FREQ_Y  35.0 // NSTEPP || 2024/05/28
+    #define SHAPING_FREQ_Y  54.0 // NSTEPP || 2024/05/28
     #define SHAPING_ZETA_Y   0.15       // Damping ratio of the Y axis (range: 0.0 = no damping to 1.0 = critical damping).
   #endif
   //#define SHAPING_MIN_FREQ  20.0      // (Hz) By default the minimum of the shaping frequencies. Override to affect SRAM usage.
@@ -1416,8 +1416,7 @@
 //#define MICROSTEP32 HIGH,LOW,HIGH
 
 // Microstep settings (Requires a board with pins named X_MS1, X_MS2, etc.)
-// #define MICROSTEP_MODES { 16, 16, 16, 16, 16, 16 } // [1,2,4,8,16]; NSTEPP || 2024/05/28
-#define MICROSTEP_MODES { 32, 32, 32, 32, 16, 16 } // NSTEPP || 2024/05/28
+#define MICROSTEP_MODES { 16, 16, 16, 16, 16, 16 } // [1,2,4,8,16];
 
 /**
  *  @section  stepper motor current
@@ -2299,7 +2298,7 @@
   #if ENABLED(DOUBLECLICK_FOR_Z_BABYSTEPPING)
     #define DOUBLECLICK_MAX_INTERVAL 1250   // Maximum interval between clicks, in milliseconds.
                                             // Note: Extra time may be added to mitigate controller latency.
-    //#define MOVE_Z_WHEN_IDLE              // Jump to the move Z menu on double-click when printer is idle.
+    #define MOVE_Z_WHEN_IDLE                // Jump to the move Z menu on double-click when printer is idle. ; NSTEPP || 2024/06/30
     #if ENABLED(MOVE_Z_WHEN_IDLE)
       #define MOVE_Z_IDLE_MULTIPLICATOR 1   // Multiply 1mm by this factor for the move step size.
     #endif
@@ -2994,7 +2993,8 @@
   #define INTERPOLATE      true
 
   #if AXIS_IS_TMC_CONFIG(X)
-    #define X_CURRENT       580        // (mA) RMS current. Multiply by 1.414 for peak current.
+    // #define X_CURRENT       580        // (mA) RMS current. Multiply by 1.414 for peak current. ; NSTEPP || 2024/06/30
+    #define X_CURRENT       760        // NSTEPP || 2024/06/30
     #define X_CURRENT_HOME  (X_CURRENT/2)  // (mA) RMS current for homing. (Typically lower than *_CURRENT.)
     #define X_MICROSTEPS     16        // 0..256
     #define X_RSENSE          0.11     // Multiplied x1000 for TMC26X
@@ -3014,7 +3014,8 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Y)
-    #define Y_CURRENT       580
+    // #define Y_CURRENT       580 // NSTEPP || 2024/06/30
+    #define Y_CURRENT       760 //NSTEPP || 2024/06/30
     #define Y_CURRENT_HOME  (Y_CURRENT/2)
     #define Y_MICROSTEPS     16
     #define Y_RSENSE          0.11
@@ -3034,7 +3035,8 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Z)
-    #define Z_CURRENT       580
+    // #define Z_CURRENT       580 // NSTEPP || 2024/06/30
+    #define Z_CURRENT       760 // NSTEPP || 2024/06/30
     #define Z_CURRENT_HOME  Z_CURRENT
     #define Z_MICROSTEPS     16
     #define Z_RSENSE          0.11
