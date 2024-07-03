@@ -1206,18 +1206,16 @@
 #define INPUT_SHAPING_Y // NSTEPP || 2024/05/28
 #if ANY(INPUT_SHAPING_X, INPUT_SHAPING_Y)
   #if ENABLED(INPUT_SHAPING_X)
-    // #define SHAPING_FREQ_X  40.0        // (Hz) The default dominant resonant frequency on the X axis. ; NSTEPP || 2024/05/28
-    #define SHAPING_FREQ_X  40.0 // NSTEPP || 2024/05/28
-    #define SHAPING_ZETA_X   0.15       // Damping ratio of the X axis (range: 0.0 = no damping to 1.0 = critical damping).
+    #define SHAPING_FREQ_X     40.0   //( Hz) The default dominant resonant frequency on the X axis. ; NSTEPP || 2024/07/02
+    #define SHAPING_ZETA_X     0.15   // Damping ratio of the X axis (range: 0.0 = no damping to 1.0 = critical damping). ; NSTEPP || 2024/07/02
   #endif
   #if ENABLED(INPUT_SHAPING_Y)
-    // #define SHAPING_FREQ_Y  40.0        // (Hz) The default dominant resonant frequency on the Y axis. ; NSTEPP || 2024/05/28
-    #define SHAPING_FREQ_Y  30.0 // NSTEPP || 2024/05/28
-    #define SHAPING_ZETA_Y   0.15       // Damping ratio of the Y axis (range: 0.0 = no damping to 1.0 = critical damping).
+    #define SHAPING_FREQ_Y     30.0   // (Hz) The default dominant resonant frequency on the Y axis. ; NSTEPP || 2024/07/02
+    #define SHAPING_ZETA_Y     0.15   // Damping ratio of the Y axis (range: 0.0 = no damping to 1.0 = critical damping). ; NSTEPP || 2024/07/02
   #endif
-  //#define SHAPING_MIN_FREQ  20.0      // (Hz) By default the minimum of the shaping frequencies. Override to affect SRAM usage.
-  //#define SHAPING_MAX_STEPRATE 10000  // By default the maximum total step rate of the shaped axes. Override to affect SRAM usage.
-  //#define SHAPING_MENU                // Add a menu to the LCD to set shaping parameters.
+  #define SHAPING_MIN_FREQ      20.0  // (Hz) By default the minimum of the shaping frequencies. Override to affect SRAM usage. ; NSTEPP || 2024/07/02
+  #define SHAPING_MAX_STEPRATE 10000  // By default the maximum total step rate of the shaped axes. Override to affect SRAM usage. ; NSTEPP || 2024/07/02
+  #define SHAPING_MENU                // Add a menu to the LCD to set shaping parameters. ; NSTEPP || 2024/07/02
 #endif
 
 // @section motion
@@ -1727,13 +1725,13 @@
 
   #define SD_MENU_CONFIRM_START             // Confirm the selected SD file before printing
 
-  //#define NO_SD_AUTOSTART                 // Remove auto#.g file support completely to save some Flash, SRAM
-  //#define MENU_ADDAUTOSTART               // Add a menu option to run auto#.g files
+  #define NO_SD_AUTOSTART                   // Remove auto#.g file support completely to save some Flash, SRAM ; NSTEPP || 2024/07/02
+  #define MENU_ADDAUTOSTART                 // Add a menu option to run auto#.g files ; NSTEPP || 2024/07/02
 
-  //#define ONE_CLICK_PRINT                 // Prompt to print the newest file on inserted media
+  #define ONE_CLICK_PRINT                   // Prompt to print the newest file on inserted media ; NSTEPP || 2024/07/02
   //#define BROWSE_MEDIA_ON_INSERT          // Open the file browser when media is inserted
 
-  //#define MEDIA_MENU_AT_TOP               // Force the media menu to be listed on the top of the main menu
+  #define MEDIA_MENU_AT_TOP                 // Force the media menu to be listed on the top of the main menu ; NSTEPP || 2024/07/02
 
   #define EVENT_GCODE_SD_ABORT "G28XY"      // G-code to run on SD Abort Print (e.g., "G28XY" or "G27")
 
@@ -1929,7 +1927,7 @@
   #define SDCARD_CONNECTION ONBOARD
 
   // Enable if SD detect is rendered useless (e.g., by using an SD extender)
-  //#define NO_SD_DETECT
+  #define NO_SD_DETECT // NSTEPP || 2024/07/02
 
   /**
    * Multiple volume support - EXPERIMENTAL.
@@ -2022,9 +2020,10 @@
   //#define STATUS_CUTTER_ANIM        // Use a second bitmap to indicate spindle / laser active
   //#define STATUS_COOLER_ANIM        // Use a second bitmap to indicate laser cooling
   //#define STATUS_FLOWMETER_ANIM     // Use multiple bitmaps to indicate coolant flow
-  //#define STATUS_ALT_BED_BITMAP     // Use the alternative bed bitmap
-  //#define STATUS_ALT_FAN_BITMAP     // Use the alternative fan bitmap
+  #define STATUS_ALT_BED_BITMAP       // Use the alternative bed bitmap ; NSTEPP 2024/07/02
+  #define STATUS_ALT_FAN_BITMAP       // Use the alternative fan bitmap ; NSTEPP 2024/07/02
   //#define STATUS_FAN_FRAMES 3       // :[0,1,2,3,4] Number of fan animation frames
+  #define STATUS_FAN_FRAMES 4        // NSTEPP 2024/07/02
 
   // Only one STATUS_HEAT_* option can be enabled
   //#define STATUS_HEAT_PERCENT       // Show heating in a progress bar
@@ -2993,12 +2992,11 @@
   #define INTERPOLATE      true
 
   #if AXIS_IS_TMC_CONFIG(X)
-    // #define X_CURRENT       580        // (mA) RMS current. Multiply by 1.414 for peak current. ; NSTEPP || 2024/06/30
-    #define X_CURRENT       760        // NSTEPP || 2024/06/30
-    #define X_CURRENT_HOME  (X_CURRENT/2)  // (mA) RMS current for homing. (Typically lower than *_CURRENT.)
-    #define X_MICROSTEPS     16        // 0..256
-    #define X_RSENSE          0.11     // Multiplied x1000 for TMC26X
-    #define X_CHAIN_POS      -1        // -1..0: Not chained. 1: MCU MOSI connected. 2: Next in chain, ...
+    #define X_CURRENT         580       // (mA) RMS current. Multiply by 1.414 for peak current. ; NSTEPP || 2024/07/02
+    #define X_CURRENT_HOME    X_CURRENT // (mA) RMS current for homing. (Typically lower than *_CURRENT.) ; NSTEPP || 2024/07/02
+    #define X_MICROSTEPS      16        // 0..256
+    #define X_RSENSE          0.11        // Multiplied x1000 for TMC26X ; NSTEPP || 2024/07/02
+    #define X_CHAIN_POS       -1        // -1..0: Not chained. 1: MCU MOSI connected. 2: Next in chain, ...
     //#define X_INTERPOLATE  true      // Enable to override 'INTERPOLATE' for the X axis
     //#define X_HOLD_MULTIPLIER 0.5    // Enable to override 'HOLD_MULTIPLIER' for the X axis
   #endif
@@ -3014,12 +3012,11 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Y)
-    // #define Y_CURRENT       580 // NSTEPP || 2024/06/30
-    #define Y_CURRENT       760 //NSTEPP || 2024/06/30
-    #define Y_CURRENT_HOME  (Y_CURRENT/2)
-    #define Y_MICROSTEPS     16
-    #define Y_RSENSE          0.11
-    #define Y_CHAIN_POS      -1
+    #define Y_CURRENT         580       // NSTEPP || 2024/07/02
+    #define Y_CURRENT_HOME    Y_CURRENT // NSTEPP || 2024/07/02
+    #define Y_MICROSTEPS      16
+    #define Y_RSENSE          0.11      // NSTEPP || 2024/07/02
+    #define Y_CHAIN_POS       -1
     //#define Y_INTERPOLATE  true
     //#define Y_HOLD_MULTIPLIER 0.5
   #endif
@@ -3035,12 +3032,11 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Z)
-    // #define Z_CURRENT       580 // NSTEPP || 2024/06/30
-    #define Z_CURRENT       760 // NSTEPP || 2024/06/30
-    #define Z_CURRENT_HOME  Z_CURRENT
-    #define Z_MICROSTEPS     16
-    #define Z_RSENSE          0.11
-    #define Z_CHAIN_POS      -1
+    #define Z_CURRENT         580       // NSTEPP || 2024/07/02
+    #define Z_CURRENT_HOME    Z_CURRENT // NSTEPP || 2024/07/02
+    #define Z_MICROSTEPS      16
+    #define Z_RSENSE          0.11      // NSTEPP || 2024/07/02
+    #define Z_CHAIN_POS       -1
     //#define Z_INTERPOLATE  true
     //#define Z_HOLD_MULTIPLIER 0.5
   #endif
