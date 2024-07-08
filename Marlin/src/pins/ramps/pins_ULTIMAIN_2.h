@@ -55,7 +55,8 @@
 //
 #define X_STOP_PIN                            22
 #define Y_STOP_PIN                            26
-#define Z_STOP_PIN                            29
+#define Z_STOP_PIN                            69
+#define SERVO0_PIN 29 // NSTEPP || 2024/06/10; Servo pin needed for BLTouch pin stow / deploy operations.
 
 //
 // Steppers
