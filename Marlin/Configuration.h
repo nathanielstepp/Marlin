@@ -1605,7 +1605,7 @@
  *     O-- FRONT --+
  */
 // #define NOZZLE_TO_PROBE_OFFSET { 10, 10, 0 }
- #define NOZZLE_TO_PROBE_OFFSET { -45, -5, -2.325 } // NSTEPP || 2024/06/30
+ #define NOZZLE_TO_PROBE_OFFSET { -45, -5, -2.450 } // NSTEPP || 2024/07/04
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
 #define PROBING_TOOL 0
@@ -1619,11 +1619,10 @@
 
 // X and Y axis travel speed (mm/min) between probes
 // #define XY_PROBE_FEEDRATE (133*60) // NSTEPP || 2024/06/30
-#define XY_PROBE_FEEDRATE (200*60) // NSTEPP || 2024/06/30
+#define XY_PROBE_FEEDRATE (150*60) // NSTEPP || 2024/07/05
 
 // Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
-// #define Z_PROBE_FEEDRATE_FAST (4*60) // NSTEPP || 2024/06/30
-#define Z_PROBE_FEEDRATE_FAST (10*60) // NSTEPP || 2024/06/30
+#define Z_PROBE_FEEDRATE_FAST (4*60)
 
 // Feedrate (mm/min) for the "accurate" probe of each point
 #define Z_PROBE_FEEDRATE_SLOW (Z_PROBE_FEEDRATE_FAST / 2)
@@ -1696,7 +1695,7 @@
 #define Z_PROBE_ERROR_TOLERANCE     3 // (mm) Tolerance for early trigger (<= -probe.offset.z + ZPET)
 //#define Z_AFTER_PROBING           5 // (mm) Z position after probing is done
 
-#define Z_PROBE_LOW_POINT          -2 // (mm) Farthest distance below the trigger-point to go before stopping
+#define Z_PROBE_LOW_POINT          -3 // (mm) Farthest distance below the trigger-point to go before stopping ; NSTEPP 2024/07/05
 
 // For M851 provide ranges for adjusting the X, Y, and Z probe offsets
 //#define PROBE_OFFSET_XMIN -50   // (mm)
@@ -1722,15 +1721,15 @@
  * These options are most useful for the BLTouch probe, but may also improve
  * readings with inductive probes and piezo sensors.
  */
-//#define PROBING_HEATERS_OFF       // Turn heaters off when probing
+#define PROBING_HEATERS_OFF         // Turn heaters off when probing ; NSTEPP 2024/07/05
 #if ENABLED(PROBING_HEATERS_OFF)
   //#define WAIT_FOR_BED_HEATER     // Wait for bed to heat back up between probes (to improve accuracy)
   //#define WAIT_FOR_HOTEND         // Wait for hotend to heat back up between probes (to improve accuracy & prevent cold extrude)
 #endif
-//#define PROBING_FANS_OFF          // Turn fans off when probing
-//#define PROBING_ESTEPPERS_OFF     // Turn all extruder steppers off when probing
-//#define PROBING_STEPPERS_OFF      // Turn all steppers off (unless needed to hold position) when probing (including extruders)
-//#define DELAY_BEFORE_PROBING 200  // (ms) To prevent vibrations from triggering piezo sensors
+#define PROBING_FANS_OFF            // Turn fans off when probing ; NSTEPP 2024/07/05
+#define PROBING_ESTEPPERS_OFF       // Turn all extruder steppers off when probing ; NSTEPP 2024/07/05
+#define PROBING_STEPPERS_OFF        // Turn all steppers off (unless needed to hold position) when probing (including extruders) ; NSTEPP 2024/07/05
+#define DELAY_BEFORE_PROBING 200    // (ms) To prevent vibrations from triggering piezo sensors ; NSTEPP 2024/07/05
 
 // Require minimum nozzle and/or bed temperature for probing
 //#define PREHEAT_BEFORE_PROBING
@@ -1813,8 +1812,8 @@
 //#define Z_CLEARANCE_FOR_HOMING  4   // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
                                       // You'll need this much clearance above Z_MAX_POS to avoid grinding.
 
-//#define Z_AFTER_HOMING         10   // (mm) Height to move to after homing (if Z was homed)
-//#define XY_AFTER_HOMING { 10, 10 }  // (mm) Move to an XY position after homing (and raising Z)
+#define Z_AFTER_HOMING         10   // (mm) Height to move to after homing (if Z was homed) ; NSTEPP || 2024/07/06
+#define XY_AFTER_HOMING { 10, 10 }  // (mm) Move to an XY position after homing (and raising Z) ; NSTEPP || 2024/07/06
 
 //#define EVENT_GCODE_AFTER_HOMING "M300 P440 S200"  // Commands to run after G28 (and move to XY_AFTER_HOMING)
 
@@ -2100,7 +2099,7 @@
  * Turn on with the command 'M111 S32'.
  * NOTE: Requires a lot of flash!
  */
-//#define DEBUG_LEVELING_FEATURE
+#define DEBUG_LEVELING_FEATURE // NSTEPP || 2024/07/05
 
 #if ANY(MESH_BED_LEVELING, AUTO_BED_LEVELING_UBL, PROBE_MANUALLY)
   // Set a height for the start of manual adjustment
@@ -2431,29 +2430,65 @@
 //
 // Preheat Constants - Up to 10 are supported without changes
 //
-#define PREHEAT_1_LABEL       "PLA"
-#define PREHEAT_1_TEMP_HOTEND 185
-#define PREHEAT_1_TEMP_BED     45
-#define PREHEAT_1_TEMP_CHAMBER 35
-#define PREHEAT_1_FAN_SPEED   255 // Value from 0 to 255
+#define PREHEAT_1_LABEL         "PLA"  // NSTEPP || 2024/07/09
+#define PREHEAT_1_TEMP_HOTEND   215    // NSTEPP || 2024/07/09
+#define PREHEAT_1_TEMP_BED       60    // NSTEPP || 2024/07/09
+#define PREHEAT_1_TEMP_CHAMBER   35    // NSTEPP || 2024/07/09
+#define PREHEAT_1_FAN_SPEED     255    // Value from 0 to 255
 
-#define PREHEAT_2_LABEL       "ABS"
-#define PREHEAT_2_TEMP_HOTEND 240
-#define PREHEAT_2_TEMP_BED    110
-#define PREHEAT_2_TEMP_CHAMBER 35
-#define PREHEAT_2_FAN_SPEED   255 // Value from 0 to 255
+#define PREHEAT_2_LABEL         "PETG" // NSTEPP || 2024/07/09
+#define PREHEAT_2_TEMP_HOTEND   230    // NSTEPP || 2024/07/09
+#define PREHEAT_2_TEMP_BED       85    // NSTEPP || 2024/07/09
+#define PREHEAT_2_TEMP_CHAMBER   35    // NSTEPP || 2024/07/09
+#define PREHEAT_2_FAN_SPEED     255    // Value from 0 to 255
 
-#define PREHEAT_3_LABEL       "PETG"
-#define PREHEAT_3_TEMP_HOTEND 220
-#define PREHEAT_3_TEMP_BED     45
-#define PREHEAT_3_TEMP_CHAMBER 35
-#define PREHEAT_3_FAN_SPEED   255 // Value from 0 to 255
+#define PREHEAT_3_LABEL         "ASA"  // NSTEPP || 2024/07/09
+#define PREHEAT_3_TEMP_HOTEND   260    // NSTEPP || 2024/07/09
+#define PREHEAT_3_TEMP_BED      100    // NSTEPP || 2024/07/09
+#define PREHEAT_3_TEMP_CHAMBER   35    // NSTEPP || 2024/07/09
+#define PREHEAT_3_FAN_SPEED     128    // Value from 0 to 255 ; NSTEPP || 2024/07/09
 
-#define PREHEAT_4_LABEL       "Nylon"
-#define PREHEAT_4_TEMP_HOTEND 230
-#define PREHEAT_4_TEMP_BED    45
-#define PREHEAT_4_TEMP_CHAMBER 35
-#define PREHEAT_4_FAN_SPEED   255 // Value from 0 to 255
+#define PREHEAT_4_LABEL         "PC"   // NSTEPP || 2024/07/09
+#define PREHEAT_4_TEMP_HOTEND   275    // NSTEPP || 2024/07/09
+#define PREHEAT_4_TEMP_BED      100    // NSTEPP || 2024/07/09
+#define PREHEAT_4_TEMP_CHAMBER   35
+#define PREHEAT_4_FAN_SPEED     128    // Value from 0 to 255 ; NSTEPP || 2024/07/09
+
+#define PREHEAT_5_LABEL         "PVB"  // NSTEPP || 2024/07/09
+#define PREHEAT_5_TEMP_HOTEND   215    // NSTEPP || 2024/07/09
+#define PREHEAT_5_TEMP_BED       75    // NSTEPP || 2024/07/09
+#define PREHEAT_5_TEMP_CHAMBER   35    // NSTEPP || 2024/07/09
+#define PREHEAT_5_FAN_SPEED     128    // Value from 0 to 255 ; NSTEPP || 2024/07/09
+
+#define PREHEAT_6_LABEL         "ABS"  // NSTEPP || 2024/07/09
+#define PREHEAT_6_TEMP_HOTEND   255    // NSTEPP || 2024/07/09
+#define PREHEAT_6_TEMP_BED      100    // NSTEPP || 2024/07/09
+#define PREHEAT_6_TEMP_CHAMBER   35    // NSTEPP || 2024/07/09
+#define PREHEAT_6_FAN_SPEED     128    // Value from 0 to 255 ; NSTEPP || 2024/07/09
+
+#define PREHEAT_7_LABEL         "HIPS" // NSTEPP || 2024/07/09
+#define PREHEAT_7_TEMP_HOTEND   220    // NSTEPP || 2024/07/09
+#define PREHEAT_7_TEMP_BED      100    // NSTEPP || 2024/07/09
+#define PREHEAT_7_TEMP_CHAMBER   35    // NSTEPP || 2024/07/09
+#define PREHEAT_7_FAN_SPEED     128    // Value from 0 to 255 ; NSTEPP || 2024/07/09
+
+#define PREHEAT_8_LABEL         "PP"   // NSTEPP || 2024/07/09
+#define PREHEAT_8_TEMP_HOTEND   240    // NSTEPP || 2024/07/09
+#define PREHEAT_8_TEMP_BED      100    // NSTEPP || 2024/07/09
+#define PREHEAT_8_TEMP_CHAMBER   35    // NSTEPP || 2024/07/09
+#define PREHEAT_8_FAN_SPEED     128    // Value from 0 to 255 ; NSTEPP || 2024/07/09
+
+#define PREHEAT_9_LABEL         "FLEX" // NSTEPP || 2024/07/09
+#define PREHEAT_9_TEMP_HOTEND   240    // NSTEPP || 2024/07/09
+#define PREHEAT_9_TEMP_BED       50    // NSTEPP || 2024/07/09
+#define PREHEAT_9_TEMP_CHAMBER   35    // NSTEPP || 2024/07/09
+#define PREHEAT_9_FAN_SPEED     255    // Value from 0 to 255 ; NSTEPP || 2024/07/09
+
+#define PREHEAT_10_LABEL        "PA"   // NSTEPP || 2024/07/09
+#define PREHEAT_10_TEMP_HOTEND  285    // NSTEPP || 2024/07/09
+#define PREHEAT_10_TEMP_BED     100    // NSTEPP || 2024/07/09
+#define PREHEAT_10_TEMP_CHAMBER  35    // NSTEPP || 2024/07/09
+#define PREHEAT_10_FAN_SPEED    128    // Value from 0 to 255 ; NSTEPP || 2024/07/09
 
 // @section motion
 
@@ -2793,8 +2828,8 @@
 // Note: Test audio output with the G-Code:
 //  M300 S<frequency Hz> P<duration ms>
 //
-//#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 2
-//#define LCD_FEEDBACK_FREQUENCY_HZ 5000
+#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 2 // NSTEPP || 2024/07/05
+#define LCD_FEEDBACK_FREQUENCY_HZ 5000 // NSTEPP || 2024/07/05
 
 //
 // Tone queue size, used to keep beeps from blocking execution.
@@ -2806,7 +2841,7 @@
 // A sequence of tones to play at startup, in pairs of tone (Hz), duration (ms).
 // Silence in-between tones.
 //
-//#define STARTUP_TUNE { 698, 300, 0, 50, 523, 50, 0, 25, 494, 50, 0, 25, 523, 100, 0, 50, 554, 300, 0, 100, 523, 300 }
+#define STARTUP_TUNE { 698, 300, 0, 50, 523, 50, 0, 25, 494, 50, 0, 25, 523, 100, 0, 50, 554, 300, 0, 100, 523, 300 } // NSTEPP || 2024/07/05
 
 //=============================================================================
 //======================== LCD / Controller Selection =========================
@@ -3595,7 +3630,7 @@
 #endif
 
 // Support for Adafruit NeoPixel LED driver
-//#define NEOPIXEL_LED
+#define NEOPIXEL_LED // NSTEPP || 2024/07/06
 #if ENABLED(NEOPIXEL_LED)
   #define NEOPIXEL_TYPE          NEO_GRBW // NEO_GRBW, NEO_RGBW, NEO_GRB, NEO_RBG, etc.
                                           // See https://github.com/adafruit/Adafruit_NeoPixel/blob/master/Adafruit_NeoPixel.h
@@ -3605,7 +3640,7 @@
   #define NEOPIXEL_PIXELS              30 // Number of LEDs in the strip. (Longest strip when NEOPIXEL2_SEPARATE is disabled.)
   #define NEOPIXEL_IS_SEQUENTIAL          // Sequential display for temperature change - LED by LED. Disable to change all LEDs at once.
   #define NEOPIXEL_BRIGHTNESS         127 // Initial brightness (0-255)
-  //#define NEOPIXEL_STARTUP_TEST         // Cycle through colors at startup
+  #define NEOPIXEL_STARTUP_TEST           // Cycle through colors at startup ; NSTEPP || 2024/07/06
 
   // Support for second Adafruit NeoPixel LED driver controlled with M150 S1 ...
   //#define NEOPIXEL2_SEPARATE
