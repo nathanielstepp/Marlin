@@ -63,7 +63,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(Rob Mendon, default config)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(Nathaniel A. Stepp; Derived from default config by Rob Mendon)" // Who made the changes. ; NSTEPP || 2024/07/08
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 // @section machine
@@ -1598,7 +1598,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { 30, -25, -2.424 } // NSTEPP || 2024/06/10
+#define NOZZLE_TO_PROBE_OFFSET { 30, -25, -2.474 } // NSTEPP || 2024/06/10
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
 #define PROBING_TOOL 0
@@ -2240,7 +2240,7 @@
 #define LCD_BED_TRAMMING // NSTEPP || 2024/06/11
 
 #if ENABLED(LCD_BED_TRAMMING)
-  #define BED_TRAMMING_INSET_LFRB { 30, 30, 30, 30 } // (mm) Left, Front, Right, Back insets
+  #define BED_TRAMMING_INSET_LFRB { 20, 0, 42, 0 } // (mm) Left, Front, Right, Back insets ; NSTEPP || 2027/07/09
   #define BED_TRAMMING_HEIGHT      0.0        // (mm) Z height of nozzle at tramming points
   #define BED_TRAMMING_Z_HOP       4.0        // (mm) Z raise between tramming points
   #define BED_TRAMMING_INCLUDE_CENTER         // Move to the center after the last corner // NSTEPP || 2024/06/10
@@ -2248,7 +2248,7 @@
   #if ENABLED(BED_TRAMMING_USE_PROBE)
     #define BED_TRAMMING_PROBE_TOLERANCE 0.1  // (mm)
     #define BED_TRAMMING_VERIFY_RAISED        // After adjustment triggers the probe, re-probe to verify
-    //#define BED_TRAMMING_AUDIO_FEEDBACK
+    #define BED_TRAMMING_AUDIO_FEEDBACK // NSTEPP || 2024/07/09
   #endif
 
   /**
@@ -2268,7 +2268,7 @@
    *  |  1       2  |   | 1         4 |    | 1         2 |   | 2           |
    *  LF --------- RF   LF --------- RF    LF --------- RF   LF --------- RF
    */
-  #define BED_TRAMMING_LEVELING_ORDER { LF, RF, RB, LB }
+  #define BED_TRAMMING_LEVELING_ORDER { LB, RB } // NSTEPP || 2024/07/09
 #endif
 
 // @section homing
@@ -2420,17 +2420,65 @@
 //
 // Preheat Constants - Up to 10 are supported without changes
 //
-#define PREHEAT_1_LABEL       "PLA"
-#define PREHEAT_1_TEMP_HOTEND 180
-#define PREHEAT_1_TEMP_BED     70
-#define PREHEAT_1_TEMP_CHAMBER 35
-#define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
+#define PREHEAT_1_LABEL         "PLA"  // NSTEPP || 2024/07/09
+#define PREHEAT_1_TEMP_HOTEND   215    // NSTEPP || 2024/07/09
+#define PREHEAT_1_TEMP_BED       60    // NSTEPP || 2024/07/09
+#define PREHEAT_1_TEMP_CHAMBER   35    // NSTEPP || 2024/07/09
+#define PREHEAT_1_FAN_SPEED     255    // Value from 0 to 255 ; NSTEPP || 2024/07/09
 
-#define PREHEAT_2_LABEL       "ABS"
-#define PREHEAT_2_TEMP_HOTEND 240
-#define PREHEAT_2_TEMP_BED    110
-#define PREHEAT_2_TEMP_CHAMBER 35
-#define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
+#define PREHEAT_2_LABEL         "PETG" // NSTEPP || 2024/07/09
+#define PREHEAT_2_TEMP_HOTEND   230    // NSTEPP || 2024/07/09
+#define PREHEAT_2_TEMP_BED       85    // NSTEPP || 2024/07/09
+#define PREHEAT_2_TEMP_CHAMBER   35    // NSTEPP || 2024/07/09
+#define PREHEAT_2_FAN_SPEED     255    // Value from 0 to 255 ; NSTEPP || 2024/07/09
+
+#define PREHEAT_3_LABEL         "ASA"  // NSTEPP || 2024/07/09
+#define PREHEAT_3_TEMP_HOTEND   260    // NSTEPP || 2024/07/09
+#define PREHEAT_3_TEMP_BED      100    // NSTEPP || 2024/07/09
+#define PREHEAT_3_TEMP_CHAMBER   35    // NSTEPP || 2024/07/09
+#define PREHEAT_3_FAN_SPEED     127    // Value from 0 to 255 ; NSTEPP || 2024/07/09
+
+#define PREHEAT_4_LABEL         "PC"   // NSTEPP || 2024/07/09
+#define PREHEAT_4_TEMP_HOTEND   275    // NSTEPP || 2024/07/09
+#define PREHEAT_4_TEMP_BED      100    // NSTEPP || 2024/07/09
+#define PREHEAT_4_TEMP_CHAMBER   35    // NSTEPP || 2024/07/09
+#define PREHEAT_4_FAN_SPEED       0    // Value from 0 to 255 ; NSTEPP || 2024/07/09
+
+#define PREHEAT_5_LABEL         "PVB"  // NSTEPP || 2024/07/09
+#define PREHEAT_5_TEMP_HOTEND   215    // NSTEPP || 2024/07/09
+#define PREHEAT_5_TEMP_BED       75    // NSTEPP || 2024/07/09
+#define PREHEAT_5_TEMP_CHAMBER   35    // NSTEPP || 2024/07/09
+#define PREHEAT_5_FAN_SPEED     127    // Value from 0 to 255 ; NSTEPP || 2024/07/09
+
+#define PREHEAT_6_LABEL         "ABS"  // NSTEPP || 2024/07/09
+#define PREHEAT_6_TEMP_HOTEND   255    // NSTEPP || 2024/07/09
+#define PREHEAT_6_TEMP_BED      100    // NSTEPP || 2024/07/09
+#define PREHEAT_6_TEMP_CHAMBER   35    // NSTEPP || 2024/07/09
+#define PREHEAT_6_FAN_SPEED     127    // Value from 0 to 255 ; NSTEPP || 2024/07/09
+
+#define PREHEAT_7_LABEL         "HIPS" // NSTEPP || 2024/07/09
+#define PREHEAT_7_TEMP_HOTEND   220    // NSTEPP || 2024/07/09
+#define PREHEAT_7_TEMP_BED      100    // NSTEPP || 2024/07/09
+#define PREHEAT_7_TEMP_CHAMBER   35    // NSTEPP || 2024/07/09
+#define PREHEAT_7_FAN_SPEED     127    // Value from 0 to 255 ; NSTEPP || 2024/07/09
+
+#define PREHEAT_8_LABEL         "PP"   // NSTEPP || 2024/07/09
+#define PREHEAT_8_TEMP_HOTEND   240    // NSTEPP || 2024/07/09
+#define PREHEAT_8_TEMP_BED      100    // NSTEPP || 2024/07/09
+#define PREHEAT_8_TEMP_CHAMBER   35    // NSTEPP || 2024/07/09
+#define PREHEAT_8_FAN_SPEED     127    // Value from 0 to 255 ; NSTEPP || 2024/07/09
+
+#define PREHEAT_9_LABEL         "FLEX" // NSTEPP || 2024/07/09
+#define PREHEAT_9_TEMP_HOTEND   240    // NSTEPP || 2024/07/09
+#define PREHEAT_9_TEMP_BED       50    // NSTEPP || 2024/07/09
+#define PREHEAT_9_TEMP_CHAMBER   35    // NSTEPP || 2024/07/09
+#define PREHEAT_9_FAN_SPEED     127    // Value from 0 to 255 ; NSTEPP || 2024/07/09
+
+#define PREHEAT_10_LABEL        "PA"   // NSTEPP || 2024/07/09
+#define PREHEAT_10_TEMP_HOTEND  285    // NSTEPP || 2024/07/09
+#define PREHEAT_10_TEMP_BED     100    // NSTEPP || 2024/07/09
+#define PREHEAT_10_TEMP_CHAMBER  35    // NSTEPP || 2024/07/09
+#define PREHEAT_10_FAN_SPEED      0    // Value from 0 to 255 ; NSTEPP || 2024/07/09
 
 // @section motion
 
@@ -2784,7 +2832,7 @@
 // A sequence of tones to play at startup, in pairs of tone (Hz), duration (ms).
 // Silence in-between tones.
 //
-//#define STARTUP_TUNE { 698, 300, 0, 50, 523, 50, 0, 25, 494, 50, 0, 25, 523, 100, 0, 50, 554, 300, 0, 100, 523, 300 }
+#define STARTUP_TUNE { 698, 300, 0, 50, 523, 50, 0, 25, 494, 50, 0, 25, 523, 100, 0, 50, 554, 300, 0, 100, 523, 300 } // NSTEPP || 2024/07/09
 
 //=============================================================================
 //======================== LCD / Controller Selection =========================
