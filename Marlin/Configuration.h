@@ -127,7 +127,7 @@
 //#define BLUETOOTH
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "Duplicator 6"
+#define CUSTOM_MACHINE_NAME "ER63-3DP-MMU-WD6" // NSTEPP || 2024/07/08
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -701,9 +701,6 @@
     #define DEFAULT_Ki_LIST {   0.41,   0.41 }
     #define DEFAULT_Kd_LIST {  50.98,  50.98 }
   #else
-    // #define DEFAULT_Kp   9.12
-    // #define DEFAULT_Ki   0.41
-    // #define DEFAULT_Kd  50.98
     #define DEFAULT_Kp   24.51 // NSTEPP || 2024/04/25
     #define DEFAULT_Ki    1.08 // NSTEPP || 2024/04/25
     #define DEFAULT_Kd  139.56 // NSTEPP || 2024/04/25
@@ -793,9 +790,6 @@
   //#define PID_BED_DEBUG // Print Bed PID debug data to the serial port.
 
   // Duplicator 6
-  // #define DEFAULT_bedKp 124.55
-  // #define DEFAULT_bedKi 23.46
-  // #define DEFAULT_bedKd 165.29
   #define DEFAULT_bedKp  82.52 // NSTEPP || 2024/04/25
   #define DEFAULT_bedKi  12.91 // NSTEPP || 2024/04/25
   #define DEFAULT_bedKd 351.50 // NSTEPP || 2024/04/25
@@ -1191,7 +1185,6 @@
 #define X_MAX_ENDSTOP_HIT_STATE HIGH
 #define Y_MIN_ENDSTOP_HIT_STATE LOW
 #define Y_MAX_ENDSTOP_HIT_STATE HIGH
-// #define Z_MIN_ENDSTOP_HIT_STATE LOW
 #define Z_MIN_ENDSTOP_HIT_STATE HIGH // NSTEPP || 2024/04/25
 #define Z_MAX_ENDSTOP_HIT_STATE HIGH
 #define I_MIN_ENDSTOP_HIT_STATE HIGH
@@ -1254,7 +1247,6 @@
  * Override with M92 (when enabled below)
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-// #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 400.48, 99.1 }
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.0395, 80.0395, 400.48, 415} // NSTEPP || 2024/05/16
 
 /**
@@ -1432,7 +1424,6 @@
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
 #define BLTOUCH // NSTEPP || 2024/04/25
-#define SERVO0_PIN 69 // NSTEPP || 2024/05/16; Servo pin needed for BLTouch pin stow / deploy operations.
 
 /**
  * MagLev V4 probe by MDD
@@ -1607,8 +1598,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-// #define NOZZLE_TO_PROBE_OFFSET { 10, 10, 0 }
-#define NOZZLE_TO_PROBE_OFFSET { 30, -25, -3.25 } // NSTEPP || 2024/04/25
+#define NOZZLE_TO_PROBE_OFFSET { 30, -25, -2.424 } // NSTEPP || 2024/06/10
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
 #define PROBING_TOOL 0
@@ -1622,8 +1612,7 @@
 #define PROBING_MARGIN 10 // NSTEPP || 2024/04/25
 
 // X and Y axis travel speed (mm/min) between probes
-// #define XY_PROBE_FEEDRATE (133*60)
-#define XY_PROBE_FEEDRATE (250*60) // NSTEPP || 2024/04/25
+#define XY_PROBE_FEEDRATE (150*60) // NSTEPP || 2024/07/08
 
 // Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
 #define Z_PROBE_FEEDRATE_FAST (4*60)
@@ -1791,7 +1780,7 @@
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
-#define INVERT_E0_DIR true
+#define INVERT_E0_DIR false // NSTEPP || 2024/06/11
 #define INVERT_E1_DIR false
 #define INVERT_E2_DIR false
 #define INVERT_E3_DIR false
@@ -1815,8 +1804,8 @@
 //#define Z_CLEARANCE_FOR_HOMING  4   // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
                                       // You'll need this much clearance above Z_MAX_POS to avoid grinding.
 
-//#define Z_AFTER_HOMING         10   // (mm) Height to move to after homing (if Z was homed)
-//#define XY_AFTER_HOMING { 10, 10 }  // (mm) Move to an XY position after homing (and raising Z)
+#define Z_AFTER_HOMING         10   // (mm) Height to move to after homing (if Z was homed) ; NSTEPP || 2024/07/08
+#define XY_AFTER_HOMING { 15, 15 }  // (mm) Move to an XY position after homing (and raising Z) ; NSTEPP || 2024/07/08
 
 //#define EVENT_GCODE_AFTER_HOMING "M300 P440 S200"  // Commands to run after G28 (and move to XY_AFTER_HOMING)
 
@@ -1850,10 +1839,8 @@
 // @section geometry
 
 // The size of the printable area
-// #define X_BED_SIZE 200
-// #define Y_BED_SIZE 200
 #define X_BED_SIZE 180 // NSTEPP || 2024/04/25
-#define Y_BED_SIZE 170 // NSTEPP || 2024/04/25
+#define Y_BED_SIZE 160 // NSTEPP || 2024/06/11
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
@@ -2155,7 +2142,6 @@
 #if ANY(AUTO_BED_LEVELING_LINEAR, AUTO_BED_LEVELING_BILINEAR)
 
   // Set the number of grid points per dimension.
-  // #define GRID_MAX_POINTS_X 3
   #define GRID_MAX_POINTS_X 5 // NSTEPP || 2024/04/25
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
@@ -2251,13 +2237,13 @@
 #endif
 
 // Add a menu item to move between bed corners for manual bed adjustment
-//#define LCD_BED_TRAMMING
+#define LCD_BED_TRAMMING // NSTEPP || 2024/06/11
 
 #if ENABLED(LCD_BED_TRAMMING)
   #define BED_TRAMMING_INSET_LFRB { 30, 30, 30, 30 } // (mm) Left, Front, Right, Back insets
   #define BED_TRAMMING_HEIGHT      0.0        // (mm) Z height of nozzle at tramming points
   #define BED_TRAMMING_Z_HOP       4.0        // (mm) Z raise between tramming points
-  //#define BED_TRAMMING_INCLUDE_CENTER       // Move to the center after the last corner
+  #define BED_TRAMMING_INCLUDE_CENTER         // Move to the center after the last corner // NSTEPP || 2024/06/10
   //#define BED_TRAMMING_USE_PROBE
   #if ENABLED(BED_TRAMMING_USE_PROBE)
     #define BED_TRAMMING_PROBE_TOLERANCE 0.1  // (mm)
@@ -2318,7 +2304,7 @@
 #endif
 
 // Homing speeds (linear=mm/min, rotational=°/min)
-#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (4*60) }
+#define HOMING_FEEDRATE_MM_M { (25*60), (25*60), (2*60) }
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
